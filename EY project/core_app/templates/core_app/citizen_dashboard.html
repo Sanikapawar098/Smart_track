@@ -1,0 +1,23 @@
+{% extends 'core_app/base.html' %}
+
+{% block content %}
+<h2>Citizen Dashboard</h2>
+{% if profile %}
+  <p><strong>Name:</strong> {{ request.user.get_full_name|default:request.user.username }}</p>
+  <p><strong>Address:</strong> {{ profile.area_address }}</p>
+  <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+{% else %}
+  <p>No profile found. Please contact admin.</p>
+{% endif %}
+<hr>
+<h3>Your Complaints</h3>
+{% if complaints %}
+  <ul style="list-style:none;padding:0;margin:0;">
+  {% for c in complaints %}
+    <li class="complaint-item"><a href="{% url 'core_app:complaint_detail' c.pk %}">Complaint #{{ c.pk }}</a> — {{ c.status }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>You have not submitted any complaints yet. <a href="{% url 'core_app:complaint_create' %}">Create one</a>.</p>
+{% endif %}
+{% endblock %}

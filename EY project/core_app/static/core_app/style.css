@@ -1,0 +1,35 @@
+:root{
+  --bg:#f6fbf7;
+  --card:#ffffff;
+  --accent:#8156e6;
+  --muted:#e682c4;
+  --glass:rgba(247, 242, 227, 0.842);
+}
+*{box-sizing:border-box}
+body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,var(--bg),#eef7f0); color:#1b1b1b; margin:0}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.site-header{background:linear-gradient(90deg, rgba(128, 46, 139, 0.95), rgba(34,139,110,0.95)); color:white; padding:12px 0; box-shadow:0 4px 18px rgba(0,0,0,0.08)}
+.site-header .brand{margin:0;font-weight:700;font-size:20px}
+.main-nav{display:flex;gap:14px;align-items:center}
+.main-nav a{color:rgba(255,255,255,0.9);text-decoration:none;padding:6px 10px;border-radius:6px;transition:background .15s}
+.main-nav a:hover{background:rgba(255,255,255,0.06)}
+.main{padding:36px 24px}
+.card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 18px rgba(34,34,34,0.06);margin-bottom:18px}
+h1,h2,h3{color:hwb(281 29% 29%)}
+p{color:var(--muted)}
+.btn{display:inline-block;background:var(--accent);color:white;padding:10px 14px;border-radius:8px;text-decoration:none}
+.grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+form label{display:block;margin-top:10px;color:#b042d1}
+input[type=text], input[type=password], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe8;background:var(--glass)}
+.complaint-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;border:1px solid #edf6ef;background:linear-gradient(180deg,#ffffff,#fbfffb)}
+.status-pill{padding:6px 10px;border-radius:999px;font-size:13px}
+.status-pending{background:#fff7e6;color:#8a6d00}
+.status-working{background:#e8f7ff;color:#055160}
+.status-completed{background:#e9f8ee;color:#0f5132}
+.site-footer{padding:18px 0;text-align:center;color:var(--muted);font-size:14px}
+
+/* responsive */
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+  .main-nav{flex-wrap:wrap}
+}

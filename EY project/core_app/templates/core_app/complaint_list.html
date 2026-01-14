@@ -1,0 +1,15 @@
+{% extends 'core_app/base.html' %}
+
+{% block content %}
+<h2>All Complaints</h2>
+{% if user.is_authenticated %}
+  <p><a class="btn" href="{% url 'core_app:complaint_create' %}">New Complaint</a></p>
+{% endif %}
+<ul>
+{% for c in complaints %}
+  <li><a href="{% url 'core_app:complaint_detail' c.pk %}">Complaint #{{ c.pk }}</a> — {{ c.status }}</li>
+{% empty %}
+  <li>No complaints yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

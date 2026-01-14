@@ -1,0 +1,38 @@
+{% extends 'core_app/base.html' %}
+
+{% block content %}
+<div class="card">
+	<h2>Complaint Detail</h2>
+	<p><strong>ID:</strong> {{ complaint.pk }}</p>
+	<p><strong>Customer:</strong>
+		{% if complaint.customer %}
+			{{ complaint.customer.get_full_name|default:complaint.customer.username }}
+		{% else %}
+			(unknown)
+		{% endif %}
+	</p>
+	<p><strong>Description:</strong> {{ complaint.description|default:"(none)" }}</p>
+	<p><strong>Status:</strong>
+		<span class="status-pill {% if complaint.status == 'Pending' %}status-pending{% elif complaint.status == 'working' %}status-working{% else %}status-completed{% endif %}">
+			{{ complaint.status }}
+		</span>
+	</p>
+	<p><a class="btn" href="{% url 'core_app:complaint_list' %}">Back to complaints</a></p>
+</div>
+{% endblock %}
+
+from core_app.models import Complaint
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+# pick an existing user (replace 'yourusername' if needed)
+user = User.objects.filter(is_active=True).first()
+# or use: user = User.objects.get(username='yourusername')
+
+Complaint.objects.create(
+    customer=user,
+    complaintDate=20260113,    # integer (use date like YYYYMMDD or a timestamp)
+    description="Test complaint created for debugging",
+    status=Complaint.STATUS_PENDING
+)
+# exit()

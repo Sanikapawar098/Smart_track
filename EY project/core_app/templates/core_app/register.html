@@ -1,0 +1,53 @@
+{% extends 'core_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+  <h2>Register</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="grid">
+      <div>
+        <label>Username</label>
+        {{ form.username.errors }}
+        {{ form.username }}
+
+        <label>Email</label>
+        {{ form.email.errors }}
+        {{ form.email }}
+
+        <label>Password</label>
+        {{ form.password1.errors }}
+        {{ form.password1 }}
+
+        <label>Confirm password</label>
+        {{ form.password2.errors }}
+        {{ form.password2 }}
+      </div>
+
+      <div>
+        <label>Area address</label>
+        {{ form.area_address.errors }}
+        {{ form.area_address }}
+
+        <label>Phone</label>
+        {{ form.phone_number.errors }}
+        {{ form.phone_number }}
+      </div>
+    </div>
+
+    <p><button class="btn" type="submit">Register</button></p>
+  </form>
+</div>
+{% endblock %}

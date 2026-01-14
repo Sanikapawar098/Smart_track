@@ -1,0 +1,22 @@
+{% extends 'core_app/base.html' %}
+
+{% block content %}
+<div class="card">
+  <h2>New Complaint</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <label>Description</label>
+    {{ form.description.errors }}
+    {{ form.description }}
+
+    <p><button class="btn" type="submit">Submit Complaint</button></p>
+  </form>
+</div>
+{% endblock %}

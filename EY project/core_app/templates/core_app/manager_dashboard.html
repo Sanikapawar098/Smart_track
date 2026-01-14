@@ -1,0 +1,31 @@
+{% extends 'core_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Manager Dashboard — Pending Complaints</h2>
+<div class="card">
+  {% if pending %}
+    <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px">
+    {% for c in pending %}
+      <li class="complaint-item">
+        <div>
+          <a href="{% url 'core_app:complaint_detail' c.pk %}">Complaint #{{ c.pk }}</a>
+          <div style="color:var(--muted);font-size:14px">by {{ c.customer.username }}</div>
+        </div>
+        <div>
+          {% if c.status == 'Pending' %}
+            <span class="status-pill status-pending">{{ c.status }}</span>
+          {% elif c.status == 'working' %}
+            <span class="status-pill status-working">{{ c.status }}</span>
+          {% else %}
+            <span class="status-pill status-completed">{{ c.status }}</span>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No pending complaints.</p>
+  {% endif %}
+</div>
+{% endblock %}
